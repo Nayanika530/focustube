@@ -1,0 +1,10 @@
+﻿{
+  "manifest_version": 3,
+  "name": "FocusTube",
+  "version": "0.1.0",
+  "description": "Intelligent distraction control for YouTube study sessions.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": []
+}
