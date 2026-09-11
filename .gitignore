@@ -1,0 +1,21 @@
+﻿# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+# Environment variables / secrets
+.env
+.env.local
+*.key
+*.pem
+# Build output
+dist/
+build/
+*.egg-info/
+# Editor
+.vscode/
+.idea/
+# OS
+.DS_Store
+Thumbs.db
