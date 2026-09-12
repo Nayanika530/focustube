@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusTube - Block YouTube Distractions & Ace Your Exams</title>
+  <meta name="description" content="FocusTube automatically detects and blocks distracting videos, music, gaming, and Shorts on YouTube during exams, keeping you locked into your syllabus." />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-brand" id="navBrand">
+        <img src="logo.svg" alt="FocusTube Logo" class="nav-logo-img" />
+        <span>FocusTube</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#simulator" class="nav-link">Live Simulator</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#install" class="nav-link">Installation Guide</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="focustube-extension.zip" download="focustube-extension.zip" class="btn btn-primary btn-download-action" id="btnNavDownload">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Free</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="badge-pill">
+          <span>🛡️</span>
+          <span>Exam Season Distraction Blocker v0.1.0</span>
+        </div>
+
+        <h1 class="hero-title">
+          Crush Your Exams.<br />
+          <span class="text-gradient">Not Your Attention Span.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          FocusTube turns YouTube into an intelligent study room. It automatically shields you from gaming clips, music videos, clickbait, and endless Shorts—leaving only lectures relevant to your syllabus.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="focustube-extension.zip" download="focustube-extension.zip" class="btn btn-primary btn-lg btn-download-action" id="btnHeroDownload">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Extension (.zip)</span>
+          </a>
+
+          <a href="#simulator" class="btn btn-secondary btn-lg" id="btnHeroDemo">
+            <span>⚡ Try Live Simulator</span>
+          </a>
+        </div>
+
+        <div class="browser-support">
+          <span>Compatible with:</span>
+          <div class="browser-icons">
+            <span class="browser-tag">Google Chrome</span>
+            <span class="browser-tag">Microsoft Edge</span>
+            <span class="browser-tag">Brave Browser</span>
+            <span class="browser-tag">Opera</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Simulator Section -->
+    <section class="simulator-section" id="simulator">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Interactive Test Drive</span>
+          <h2 class="section-heading">Experience the Focus Shield in Action</h2>
+          <p class="section-desc">
+            See how FocusTube dynamically distinguishes between an Operating Systems lecture and non-study entertainment.
+          </p>
+        </div>
+
+        <div class="simulator-frame" id="simFrame">
+          <!-- Toolbar -->
+          <div class="simulator-toolbar">
+            <div class="browser-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+
+            <div class="simulator-controls">
+              <label for="simVideoSelect" style="font-size: 12px; color: var(--text-muted);">Simulate Video:</label>
+              <select id="simVideoSelect" class="sim-select">
+                <option value="os_memory">📚 Study: Memory Management & Virtual Memory (OS)</option>
+                <option value="full_course">📚 Study: Operating System Full Course (freeCodeCamp)</option>
+                <option value="gta6">🎮 Distraction: GTA 6 Gameplay & World Trailer</option>
+                <option value="music">🎵 Distraction: Dua Lipa - Levitating (Music Video)</option>
+                <option value="memes">😹 Distraction: Try Not To Laugh Memes Compilation</option>
+              </select>
+
+              <div class="sim-toggle-wrapper">
+                <span>Exam Mode</span>
+                <label class="mini-switch" style="position: relative; display: inline-block; width: 34px; height: 18px;">
+                  <input type="checkbox" id="simExamToggle" checked style="opacity: 0; width: 0; height: 0;" />
+                  <span class="mini-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Player Display -->
+          <div class="player-container">
+            <canvas id="simPlayerCanvas" width="800" height="450" style="width: 100%; height: 100%;"></canvas>
+
+            <!-- Focus Shield Overlay -->
+            <div class="sim-shield-overlay" id="simShield">
+              <div class="shield-icon-badge">🛡️</div>
+              <div class="shield-status-pill">Exam Focus Mode Active</div>
+              <h3 class="shield-headline">Distraction Blocked</h3>
+              <p class="shield-reason" id="simShieldReason">
+                Matches non-study entertainment pattern.
+              </p>
+              <div class="shield-topics-box">
+                <strong style="color: var(--accent-cyan);">Active Exam Topics:</strong> Operating Systems, Memory Management
+              </div>
+              <div class="shield-actions">
+                <button class="btn btn-primary" id="simBtnSearch">
+                  🔍 Switch to OS Lecture
+                </button>
+                <button class="btn btn-secondary" id="simBtnOverride" style="font-size: 12px; padding: 8px 16px;">
+                  Allow Video for this Session
+                </button>
+              </div>
+            </div>
+
+            <!-- In-Player Diagnostic Pill -->
+            <div class="sim-diagnostic-pill" id="simDiagnosticPill">
+              <span class="status-dot green"></span> FocusTube: 📚 Study Video Allowed
+            </div>
+          </div>
+
+          <!-- Video Info Bar -->
+          <div class="sim-video-info">
+            <div>
+              <div class="sim-video-title" id="simVideoTitle">L-5.1: Memory Management and Virtual Memory in OS</div>
+              <div class="sim-video-channel" id="simVideoChannel">Gate Smashers • 1.2M views</div>
+            </div>
+            <span class="badge-pill" style="margin: 0; font-size: 11px;">Protected by FocusTube</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Supercharged Productivity</span>
+          <h2 class="section-heading">Built Specifically for Students</h2>
+          <p class="section-desc">
+            Traditional website blockers block all of YouTube. FocusTube keeps YouTube open for academic study while eliminating distracting rabbit holes.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">🎯</div>
+            <h3 class="feature-title">Smart Subject Filtering</h3>
+            <p class="feature-desc">
+              Enter your active exam subjects (e.g. <em>Operating Systems, Calculus, Data Structures</em>). FocusTube validates titles and channels against your syllabus in real-time.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">🛑</div>
+            <h3 class="feature-title">Instant Playback Intercept</h3>
+            <p class="feature-desc">
+              When an off-topic video is clicked, FocusTube instantly pauses playback, mutes audio, and raises the aesthetic Focus Shield before distractions hook your brain.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">🚫</div>
+            <h3 class="feature-title">Shorts Doom-Scroll Killer</h3>
+            <p class="feature-desc">
+              YouTube Shorts are the #1 threat to student focus. FocusTube locks down the Shorts player during study hours so you never lose 45 minutes to short-form loops.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">⚡</div>
+            <h3 class="feature-title">SPA Transition Aware</h3>
+            <p class="feature-desc">
+              YouTube never reloads pages when you click videos. FocusTube hooks into YouTube's single-page router, title changes, and DOM updates for seamless instant detection.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">🔒</div>
+            <h3 class="feature-title">100% Private & Local</h3>
+            <p class="feature-desc">
+              No account required. No external servers or telemetry. All topic evaluation happens entirely on your machine in under 5 milliseconds.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">🔓</div>
+            <h3 class="feature-title">Smart Session Override</h3>
+            <p class="feature-desc">
+              Studying an unconventional topic or documentary? One click on the shield allows the video for your current session without disabling your overall exam shield.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step-by-Step Installation Guide -->
+    <section class="install-section" id="install">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Simple 60-Second Setup</span>
+          <h2 class="section-heading">How to Install in Chrome / Edge</h2>
+          <p class="section-desc">
+            Follow these 3 quick steps to add FocusTube to your browser and protect your next study session.
+          </p>
+        </div>
+
+        <div class="install-steps-grid">
+          <div class="step-card">
+            <span class="step-number">01</span>
+            <span class="step-icon">📦</span>
+            <h3 class="step-title">Download & Unzip</h3>
+            <p class="step-desc">
+              Click the download button below to get <strong>focustube-extension.zip</strong>. Right-click the downloaded file and select <em>"Extract All..."</em>.
+            </p>
+            <a href="focustube-extension.zip" download="focustube-extension.zip" class="btn btn-primary btn-download-action" style="font-size: 13px; padding: 8px 16px;">
+              Download .ZIP (v0.1.0)
+            </a>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">02</span>
+            <span class="step-icon">⚙️</span>
+            <h3 class="step-title">Open Extension Settings</h3>
+            <p class="step-desc">
+              Open a new browser tab and navigate to your browser's extensions page, then toggle <strong>Developer mode</strong> in the top right.
+            </p>
+            <div class="code-snippet">
+              <span>chrome://extensions</span>
+              <button class="btn-copy" data-copy="chrome://extensions" title="Copy to clipboard">Copy</button>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">03</span>
+            <span class="step-icon">🚀</span>
+            <h3 class="step-title">Click "Load Unpacked"</h3>
+            <p class="step-desc">
+              Click the <strong>"Load unpacked"</strong> button in the top-left corner and select the extracted folder. FocusTube will appear in your toolbar ready to protect your exams!
+            </p>
+            <div style="font-size: 12px; color: var(--accent-emerald); font-weight: 600;">
+              ✓ Ready immediately — No restart needed
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Callout Banner -->
+        <div class="download-callout">
+          <h3 class="callout-title">Ready to Study Without Distractions?</h3>
+          <p class="callout-desc">
+            Download FocusTube now. Free forever, open source, and built to help you score higher.
+          </p>
+          <a href="focustube-extension.zip" download="focustube-extension.zip" class="btn btn-primary btn-lg btn-download-action" id="btnCalloutDownload">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download FocusTube Extension (.zip)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Got Questions?</span>
+          <h2 class="section-heading">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>How does FocusTube know what I am studying?</span>
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              You can enter any exam topics into the FocusTube popup (like <em>"Operating Systems", "Calculus", "Physics", "GATE"</em>). FocusTube combines your custom subjects with deep keyword analysis of lectures, courses, and educational channels, while filtering out known gaming, vlogs, and entertainment feeds.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I turn Focus Mode off when I'm done studying?</span>
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Yes! Simply click the FocusTube icon in your browser toolbar and toggle the master <strong>Exam Study Mode</strong> switch to OFF. All videos and YouTube features will immediately play as normal without needing a browser reload.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What if a legitimate study video is accidentally blocked?</span>
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Every blocked video screen features an <em>"Allow Video for this Session"</em> button. If an educational documentary or niche lecture has an unusual title, you can bypass the shield with one click.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Does FocusTube collect my browsing history or YouTube account data?</span>
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Absolutely not. FocusTube runs 100% locally in your browser. It has no tracking scripts, no third-party analytics, and never transmits your browsing data to any server.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="logo.svg" alt="FocusTube" style="width: 24px; height: 24px;" />
+        <span style="font-weight: 700; color: #ffffff;">FocusTube</span>
+        <span>• Intelligent YouTube Distraction Control</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#simulator" class="footer-link">Live Demo</a>
+        <a href="#install" class="footer-link">Installation</a>
+        <a href="focustube-extension.zip" download="focustube-extension.zip" class="footer-link">Download ZIP</a>
+      </div>
+
+      <div style="font-size: 12px; color: var(--text-subtle);">
+        © 2026 FocusTube. Built for students worldwide.
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

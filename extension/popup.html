@@ -1,11 +1,100 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>FocusTube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusTube - Exam Focus</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
-<body style="width: 200px; font-family: sans-serif; padding: 10px;">
-  <h3>FocusTube</h3>
-  <p>Extension loaded successfully.</p>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="brand-wrapper">
+      <div class="brand-icon">🎓</div>
+      <div class="brand-title">FocusTube</div>
+    </div>
+    <span class="version-pill">v0.1.0</span>
+  </header>
+
+  <!-- Master Exam Mode Toggle -->
+  <div class="master-card" id="masterCard">
+    <div class="master-info">
+      <h3><span>🛡️</span> Exam Study Mode</h3>
+      <p id="masterStatusText">Off-topic videos are blocked</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="examModeToggle" checked />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Study Topics Section -->
+  <div class="section-title">
+    <span>Active Study Topics</span>
+    <span style="font-size: 10px; color: var(--text-muted);" id="topicCount">0 topics</span>
+  </div>
+
+  <div class="topic-card">
+    <div class="tag-container" id="tagContainer">
+      <!-- Dynamically generated tags -->
+    </div>
+
+    <div class="tag-input-row">
+      <input 
+        type="text" 
+        id="tagInput" 
+        class="tag-input" 
+        placeholder="Add subject (e.g. Operating Systems)..." 
+        maxlength="40"
+      />
+      <button class="btn-add" id="btnAddTag">+ Add</button>
+    </div>
+
+    <!-- Quick Presets -->
+    <div class="presets-row">
+      <button class="preset-chip" data-topic="Computer Science">💻 Comp Sci</button>
+      <button class="preset-chip" data-topic="Operating Systems">⚙️ OS</button>
+      <button class="preset-chip" data-topic="Mathematics">📐 Math</button>
+      <button class="preset-chip" data-topic="Physics">⚛️ Physics</button>
+      <button class="preset-chip" data-topic="Biology">🧬 Biology</button>
+      <button class="preset-chip" data-topic="GATE / Exam Prep">📝 Exam Prep</button>
+    </div>
+  </div>
+
+  <!-- Strictness & Shorts Control -->
+  <div class="options-card">
+    <div class="option-row">
+      <div>
+        <div class="option-text">Block YouTube Shorts</div>
+        <div class="option-subtext">Eliminates short-form distraction feeds</div>
+      </div>
+      <label class="mini-switch">
+        <input type="checkbox" id="blockShortsToggle" checked />
+        <span class="mini-slider"></span>
+      </label>
+    </div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-text">Strict Topic Mode</div>
+        <div class="option-subtext">Only allow videos matching your topics</div>
+      </div>
+      <label class="mini-switch">
+        <input type="checkbox" id="strictModeToggle" />
+        <span class="mini-slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Stats Banner -->
+  <div class="stats-banner">
+    <div class="stat-item">
+      <span class="stat-number" id="blockedCount">0</span>
+      <span class="stat-label">Distractions Blocked</span>
+    </div>
+    <button class="reset-stats" id="btnResetStats" title="Reset counter">Reset</button>
+  </div>
+
+  <script src="popup.js"></script>
 </body>
 </html>
