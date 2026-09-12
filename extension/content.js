@@ -185,7 +185,7 @@ function queryVideoTitleFromDOM() {
 
   if (document.title && document.title.includes('- YouTube')) {
     const cleanTitle = document.title.replace(/\s*-\s*YouTube$/, '').trim();
-    if (cleanTitle.length > 0) {
+    if (cleanTitle.length > 0 && cleanTitle.toLowerCase() !== 'youtube') {
       return cleanTitle;
     }
   }
@@ -468,13 +468,15 @@ function showFocusShield(title, reason) {
                           document.querySelector('#player-container');
 
   if (playerContainer) {
+    shield.style.position = 'absolute';
     if (!playerContainer.style.position || playerContainer.style.position === 'static') {
       playerContainer.style.position = 'relative';
     }
     playerContainer.appendChild(shield);
     activeShieldElement = shield;
   } else {
-    // Fallback: attach to body
+    // Fallback: attach to body with fixed viewport coverage
+    shield.style.position = 'fixed';
     document.body.appendChild(shield);
     activeShieldElement = shield;
   }
